@@ -4,16 +4,30 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.banhang.diamon_shop.DiamonShop.dao.HomeDao;
+import com.banhang.diamon_shop.DiamonShop.service.HomeServiceImpl;
 
 @Controller
 public class HomeController {
-
-	@RequestMapping(value={"/", "/trang-chu"} , method = RequestMethod.GET)
+	
+	@Autowired
+	HomeServiceImpl homeService;
+	
+	@RequestMapping(value={"/", "/trang-chu"})
 	public ModelAndView test(HttpServletResponse response) throws IOException{
-		return new ModelAndView("user/index");
+		ModelAndView mv = new ModelAndView("user/index");
+		mv.addObject("slides" , homeService.GetDataSlide());
+		return mv;
+	}
+	
+	@RequestMapping(value= "/product")
+	public ModelAndView Product(HttpServletResponse response) throws IOException{
+		return new ModelAndView("user/product");
 	}
 }
