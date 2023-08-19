@@ -20,7 +20,7 @@ public class HomeController {
 	HomeServiceImpl homeService;
 	
 	@RequestMapping(value={"/", "/trang-chu"})
-	public ModelAndView test(HttpServletResponse response) throws IOException{
+	public ModelAndView Index(HttpServletResponse response) throws IOException{
 		ModelAndView mv = new ModelAndView("user/index");
 		mv.addObject("slides" , homeService.GetDataSlide());
 		return mv;
@@ -29,5 +29,10 @@ public class HomeController {
 	@RequestMapping(value= "/product")
 	public ModelAndView Product(HttpServletResponse response) throws IOException{
 		return new ModelAndView("user/product");
+	}
+	
+	@RequestMapping(value= "/login")
+	public ModelAndView Login(HttpServletResponse response) throws IOException{
+		return new ModelAndView("login/login");
 	}
 }
